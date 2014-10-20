@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+  <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script>
+  <script type="text/javascript" src="bower_components/Processing.js/processing.js"></script>
+  <style>
+  #main {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+  .ace_editor { height: 200px; }
+
+  </style>
+</head>
+<body ng-app="Pjs" ng-controller="AppController">
+  <h1>Hello My New nodewebkit project</h1>
+  <div ui-ace="{ onLoad : aceLoaded }" ></div>
+  <button>Render</button>
+  <canvas id="main"></canvas>
+  <script type="text/javascript" src="ngApp.js"></script>
+  <script>
+
+  function sketchProc(processing) {
+    processing.setup = function () {
+      processing.size(300, 300)
+    }
+    // Override draw function, by default it will be called 60 times per second
+    processing.draw = function() {
+      // determine center and max clock arm length
+      var centerX = processing.width / 2, centerY = processing.height / 2;
+      var maxArmLength = Math.min(centerX, centerY);
+  
+      function drawArm(position, lengthScale, weight) {
+        processing.strokeWeight(weight);
+        processing.line(centerX, centerY,
+          centerX + Math.sin(position * 2 * Math.PI) * lengthScale * maxArmLength,
+          centerY - Math.cos(position * 2 * Math.PI) * lengthScale * maxArmLength);
+      }
+  
+      // erase background
+      processing.background(224);
+  
+      var now = new Date();
+  
+      // Moving hours arm by small increments
+      var hoursPosition = (now.getHours() % 12 + now.getMinutes() / 60) / 12;
+      drawArm(hoursPosition, 0.5, 5);
+  
+      // Moving minutes arm by small increments
+      var minutesPosition = (now.getMinutes() + now.getSeconds() / 60) / 60;
+      drawArm(minutesPosition, 0.80, 3);
+  
+      // Moving hour arm by second increments
+      var secondsPosition = now.getSeconds() / 60;
+      drawArm(secondsPosition, 0.90, 1);
+    };
+  }
+  
+  var canvas = document.getElementById("main");
+  // attaching the sketchProc function to the canvas
+  var processingInstance = new Processing(canvas, sketchProc);
+
+  </script>
+</body>
+</html>
