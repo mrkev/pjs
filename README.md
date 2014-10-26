@@ -1,2 +1,3 @@
-## My New nodewebkit project
-##### A simple scaffolding to build a node-webkit app from scratch
+# Pjs
+
+It's almost two AM and I should go to sleep.
