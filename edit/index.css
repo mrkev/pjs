@@ -1,0 +1,33 @@
+.ace_editor {
+  height: 100%;
+}
+
+html, body {
+  height: 100%;
+}
+
+.title_bar {
+  -webkit-app-region: drag;
+}
+
+.title_bar .controls {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 3px; }
+    .title_bar .controls .win_button {
+      -webkit-app-region: no-drag;
+      height: 11px;
+      width: 11px;
+      display: block;
+      background: #e4e4e4;
+      border-radius: 5em;
+      float: right;
+      margin: 5px 2px;
+      -webkit-transition: 0.2s;
+      cursor: pointer; }
+      .title_bar .controls .win_button.close:hover {
+        background: red; }
+      .title_bar .controls .win_button.expnd:hover {
+        background: green; }
+      .title_bar .controls .win_button.minim:hover {
+        background: yellow; }

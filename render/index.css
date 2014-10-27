@@ -6,4 +6,6 @@
   display: block;
 }
 
-
+body {
+  -webkit-app-region: drag;
+}
